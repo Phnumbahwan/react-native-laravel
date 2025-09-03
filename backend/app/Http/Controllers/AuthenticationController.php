@@ -10,6 +10,7 @@ use App\Services\User\RegisterService;
 class AuthenticationController extends Controller
 {
     protected $loginService;
+
     protected $registerService;
 
     public function __construct(LoginService $loginService, RegisterService $registerService)

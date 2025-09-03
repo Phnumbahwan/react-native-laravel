@@ -13,7 +13,7 @@ class LoginService
         $user = User::where('email', $request['email'])->first();
 
         // Check password
-        if (!$user || !Hash::check($request['password'], $user->password)) {
+        if (! $user || ! Hash::check($request['password'], $user->password)) {
             return response([
                 'message' => 'Invalid input',
             ], 401);
