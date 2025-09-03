@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class AuthenticationController extends Controller
 {
@@ -19,9 +19,9 @@ class AuthenticationController extends Controller
         $user = User::where('email', $fields['email'])->first();
 
         // Check password
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+        if (! $user || ! Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'Invalid input'
+                'message' => 'Invalid input',
             ], 401);
         }
 
