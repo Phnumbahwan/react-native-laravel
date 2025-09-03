@@ -2,36 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Services\User\LoginService;
+use App\Services\User\RegisterService;
 
 class AuthenticationController extends Controller
 {
-    public function login(Request $request)
+    protected $loginService;
+    protected $registerService;
+
+    public function __construct(LoginService $loginService, RegisterService $registerService)
     {
-        $fields = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        $this->loginService = $loginService;
+        $this->registerService = $registerService;
+    }
 
-        // Check email
-        $user = User::where('email', $fields['email'])->first();
+    public function login(LoginRequest $request)
+    {
+        return $this->loginService->login($request);
+    }
 
-        // Check password
-        if (! $user || ! Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'Invalid input',
-            ], 401);
-        }
-
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token,
-        ];
-
-        return response($response, 201);
+    public function register(RegisterRequest $request)
+    {
+        return $this->registerService->register($request);
     }
 }
