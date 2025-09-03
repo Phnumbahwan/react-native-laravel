@@ -1,5 +1,8 @@
 echo "Running Pint..."
 ./backend/vendor/bin/pint || exit 1
 
+echo "Adding Pint-fixed files..."
+git add .
+
 echo "Running PHPStan..."
 ./backend/vendor/bin/phpstan analyse backend/app backend/routes || exit 1
