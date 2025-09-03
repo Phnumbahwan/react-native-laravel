@@ -21,3 +21,4 @@ jobs:
         run: ./vendor/bin/pint --test
 
       - name: Run PHPStan (static analysis)
+        run: ./vendor/bin/phpstan analyse
