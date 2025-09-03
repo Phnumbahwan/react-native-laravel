@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-
 Route::get('/hello', function () {
     return 'Hello from API!!!!';
 });

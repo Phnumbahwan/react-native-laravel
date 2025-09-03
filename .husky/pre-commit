@@ -1,5 +1,5 @@
 echo "Running Pint..."
-./vendor/bin/pint --test || exit 1
+./backend/vendor/bin/pint --test || exit 1
 
 echo "Running PHPStan..."
-./vendor/bin/phpstan analyse app routes || exit 1
+./backend/vendor/bin/phpstan analyse backend/app backend/routes || exit 1
