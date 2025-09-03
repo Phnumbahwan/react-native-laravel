@@ -9,5 +9,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/hello', function () {
-    return 'Hello from API!';
+    return 'Hello from API!!';
 });
