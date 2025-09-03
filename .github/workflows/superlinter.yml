@@ -15,10 +15,13 @@ jobs:
           php-version: '8.2'
 
       - name: Install Composer dependencies
+        working-directory: ./backend
         run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: Run Pint (code style)
+        working-directory: ./backend
         run: ./vendor/bin/pint --test
 
       - name: Run PHPStan (static analysis)
-        run: ./vendor/bin/phpstan analyse
+        working-directory: ./backend
+        run:
