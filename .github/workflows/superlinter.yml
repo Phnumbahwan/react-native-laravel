@@ -1,0 +1,27 @@
+name: Laravel CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Install Composer dependencies
+        working-directory: ./backend
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Run Pint (code style)
+        working-directory: ./backend
+        run: ./vendor/bin/pint --test
+
+      - name: Run PHPStan (static analysis)
+        working-directory: ./backend
+        run:
